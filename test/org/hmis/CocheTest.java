@@ -3,64 +3,49 @@ package org.hmis;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class CocheTest {
-
-	@Test
-	void testEqualsObject() {
-		Coche c = new Coche ();   // Arrange
-		assertTrue(c.equals(c));  // Action // Assert
-	}
-	
-	@Test
-	void testEqualsObjectNull() {
-		Coche c = new Coche ();   // Arrange
-		Coche c2 = null;
-		assertFalse(c.equals(c2));  // Action // Assert
-	}
-	
-
-	@Test
-	void testEqualsObjectString() {
-		Coche c = new Coche ();   // Arrange
-		String c2 = "";
-		assertFalse(c.equals(c2));  // Action // Assert
+	private static Coche[] coches() {
+		String ruta = "data/coches.json";
+		Coche[] coches = JsonReader.leerCochesJSON(ruta);
+		return coches;
 	}
 
-	
-	@Test
-	void testEqualsObjectMultiple1() {
-		Coche primero = new Coche ("Toyota", "Corolla", 2022, 22000);
-		Coche segundo = new Coche ("Toyota", "Corolla", 2022, 22000);
-		assertEquals(true, primero.equals(segundo));  // Action // Assert
+	@ParameterizedTest
+	@MethodSource("coches")
+	void testEquals(Coche coche) {
+		Coche coche2 = new Coche();
+		coche2.setAño(coche.getAño() + 1);
+		assertEquals(coche, coche, "Los coches deberían ser iguales");
+		assertNotEquals(coche, coche2, "Los coches no deberían ser iguales");
+		coche.equals("Otro obj");
 	}
 
-	@Test
-	void testEqualsObjectMultiple2() {
-		Coche primero = new Coche ("Toyota", "Corolla", 2022, 22000);
-		Coche segundo = new Coche ("Toyota", "Corolla", 2023, 22000);
-		assertEquals(false, primero.equals(segundo));  // Action // Assert
+	@ParameterizedTest
+	@MethodSource("coches")
+	void testToString(Coche coche) {
+		String expected = "Coche [marca=" + coche.getMarca() + ", modelo=" + coche.getModelo() + ", año="
+				+ coche.getAño() + ", precio=" + coche.getPrecio() + "]";
+		assertEquals(expected, coche.toString());
+
 	}
 
-	@Test
-	void testEqualsObjectMultiple3() {
-		Coche primero = new Coche ("Toyota", "Corolla", 2022, 22000);
-		Coche segundo = new Coche ("Nissan", "Corolla", 2022, 22000);
-		assertEquals(false, primero.equals(segundo));  // Action // Assert
-	}
-
-	@Test
-	void testEqualsObjectMultiple4() {
-		Coche primero = new Coche ("Toyota", "Corolla", 2022, 22000);
-		Coche segundo = new Coche ("Toyota", "Auris", 2022, 22000);
-		assertEquals(false, primero.equals(segundo));  // Action // Assert
-	}
-
-	@Test
-	void testEqualsObjectMultiple5() {
-		Coche primero = new Coche ("Toyota", "Corolla", 2022, 22000);
-		Coche segundo = new Coche ("Toyota", "Corolla", 2022, 32000);
-		assertEquals(false, primero.equals(segundo));  // Action // Assert
+	// test getters
+	@ParameterizedTest
+	@CsvSource({ "Audi, A6, 25000, 2022" })
+	void testGetters(String marca, String modelo, String precio, String year) {
+		Coche coche = new Coche();
+		coche.setMarca(marca);
+		coche.setModelo(modelo);
+		coche.setAño(Integer.valueOf(year));
+		coche.setPrecio(Integer.valueOf(precio));
+		assertEquals(marca, coche.getMarca());
+		assertEquals(modelo, coche.getModelo());
+		assertEquals(precio, String.valueOf(coche.getPrecio()));
+		assertEquals(year, String.valueOf(coche.getAño()));
 	}
 
 }

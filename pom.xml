@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>hmis-coches</groupId>
 	<artifactId>hmis-coches</artifactId>
@@ -18,7 +19,14 @@
 			</resource>
 		</resources>
 		<plugins>
-		<plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<release>11</release>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0</version>
@@ -40,7 +48,8 @@
 					<!-- @{argLine} necesario para Jacoco !!! -->		
 				</configuration>
 			</plugin>
-					<plugin>
+
+			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.6</version>
@@ -66,6 +75,9 @@
 							<goal>check</goal>
 						</goals>
 						<configuration>
+							<excludes>
+								<exclude>src/org/hmis/Main.java</exclude>
+							</excludes>
 							<rules>
 								<rule>
 									<element>PACKAGE</element>
@@ -73,7 +85,7 @@
 										<limit>
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.3</minimum>
+											<minimum>0.9</minimum>
 										</limit>
 									</limits>
 								</rule>
@@ -81,33 +93,6 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>  
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<release>11</release>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0</version>
-				<dependencies>
-					<dependency>
-						<groupId>me.fabriciorby</groupId>
-						<artifactId>maven-surefire-junit5-tree-reporter</artifactId>
-						<version>0.1.0</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<reportFormat>plain</reportFormat>
-					<consoleOutputReporter>
-						<disable>true</disable>
-					</consoleOutputReporter>
-					<statelessTestsetInfoReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter" />
-					<argLine>-Dfile.encoding=UTF-8</argLine>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -128,6 +113,13 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>5.9.2</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<version>5.7.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
