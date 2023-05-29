@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: org.hmis.JsonReaderTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.049 s - in org.hmis.JsonReaderTest
+org.hmis.JsonReaderTest.testLeerArchivoNoExistente(String)[1]  Time elapsed: 0.014 s
+org.hmis.JsonReaderTest.testLeerCochesJSONprimero(String)[1]  Time elapsed: 0.002 s
+org.hmis.JsonReaderTest.testLeerCochesJSON(String)[1]  Time elapsed: 0 s
+org.hmis.JsonReaderTest.testLeerCochesException(String)[1]  Time elapsed: 0.008 s

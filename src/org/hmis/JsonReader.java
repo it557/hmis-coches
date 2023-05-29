@@ -13,11 +13,10 @@ public class JsonReader {
 
 		Coche[] coches = null;
         Gson gson = new Gson();
-        JsonParser parser = new JsonParser();
 
-        try (FileReader reader = new FileReader(archivo)) {
+        try (java.io.Reader reader = new FileReader(archivo)) {
             // Parsear el archivo JSON en un objeto de la clase JsonObject
-            JsonObject jsonObject = parser.parse(reader).getAsJsonObject();
+            JsonObject jsonObject =  JsonParser.parseReader(reader).getAsJsonObject();
 
             // Obtener el arreglo de objetos "coches"
             JsonArray cochesJson = jsonObject.getAsJsonArray("coches");

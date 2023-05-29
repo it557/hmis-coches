@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: org.hmis.CocheTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.528 s - in org.hmis.CocheTest
+org.hmis.CocheTest.testToString(Coche)[1]  Time elapsed: 0.112 s
+org.hmis.CocheTest.testToString(Coche)[2]  Time elapsed: 0 s
+org.hmis.CocheTest.testToString(Coche)[3]  Time elapsed: 0.008 s
+org.hmis.CocheTest.testToString(Coche)[4]  Time elapsed: 0 s
+org.hmis.CocheTest.testGetters(String, String, String, String)[1]  Time elapsed: 0 s
+org.hmis.CocheTest.testEquals(Coche)[1]  Time elapsed: 0.008 s
+org.hmis.CocheTest.testEquals(Coche)[2]  Time elapsed: 0 s
+org.hmis.CocheTest.testEquals(Coche)[3]  Time elapsed: 0 s
+org.hmis.CocheTest.testEquals(Coche)[4]  Time elapsed: 0 s
